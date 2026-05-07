@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
 
 },{timestamps:true})
 
-UserSchema.pre("save",async(next)=>{
+UserSchema.pre("save",async function(next){
     if(!this.isModified("password")){
         return next()
     }
@@ -33,8 +33,8 @@ UserSchema.pre("save",async(next)=>{
     return next()
 })
 
-userSchema.methods.comparePassword = async(password)=>{
-    return await bcrypt.comapre(password, this.password)
+UserSchema.methods.comparePassword = async function(password){
+    return await bcrypt.compare(password, this.password)
 }
 
-export default User = mongoose.model("User",UserSchema)
+export const User = mongoose.model("User",UserSchema)
