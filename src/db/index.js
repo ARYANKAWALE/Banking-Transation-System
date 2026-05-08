@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import { DB_NAME } from "../../utils/constants.js"
+import { User } from "../models/user.models.js"
 
 
 const connectDB = async () =>{
@@ -9,8 +10,11 @@ const connectDB = async () =>{
             dbName: DB_NAME,
         })
         console.log(`\n MongoDB Connected..! DB HOST ${connectionInstance.connection.host}`)
+        await User.syncIndexes()
+        console.log("User indexes synced with schema (removed stale indexes if any)")
     } catch (error) {
-        console.log(error)
+        console.error("MongoDB connection error:", error)
+        throw error
     }
 }
 

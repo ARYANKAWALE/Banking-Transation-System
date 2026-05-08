@@ -1,9 +1,9 @@
-import mongoose, { Types } from "mongoose"
+import mongoose from "mongoose"
 import bcrypt from "bcryptjs"
 
 const UserSchema = new mongoose.Schema({
     email:{
-        require:[true,"Email is required for creating a user"],
+        required:[true,"Email is required for creating a user"],
         type:String,
         trim:true,
         lowercase:true,
